@@ -1,0 +1,244 @@
+<!DOCTYPE HTML>
+<HTML>
+<HEAD>
+<SCRIPT SRC="http://Shared.BHStudios.org/_js/jQuery-2.1.1.min.js">/* jQuery */</SCRIPT>
+<SCRIPT>
+function containsAny(haystack, needles) {
+	for(needle in needles)
+		if (haystack.indexOf(needles[needle]) >= 0)
+			return true;
+}
+$(document).ready(function() {
+	/* from to */
+	$("[data-from]").each(function(i, e) {
+		var $e = $(e),
+		froms = $e.data("from").toString().split(/\s+/); // must do toString in case we get an int
+		$e.hover(function() {
+			$e.addClass("hilighted");
+			$("[data-to]").each(function(i2, e2) {
+				var $e2 = $(e2),
+				tos = $e2.data("to").toString().split(/\s+/);
+				if (containsAny(tos, froms))
+					$e2.addClass("hilighted");
+			});
+		},
+		function() {
+			$("[data-to]").each(function(i2, e2) {
+				$e.removeClass("hilighted");
+				var $e2 = $(e2),
+				tos = $e2.data("to").toString().split(/\s+/);
+				if (containsAny(tos, froms))
+					$e2.removeClass("hilighted");
+			});
+		});
+	});
+	
+	/* to from */
+	$("[data-to]").each(function(i, e) {
+		var $e = $(e),
+		tos = $e.data("to").toString().split(/\s+/);
+		$e.hover(function() {
+			$e.addClass("hilighted");
+			$("[data-from]").each(function(i2, e2) {
+				var $e2 = $(e2),
+				froms = $e2.data("from").toString().split(/\s+/);
+				if (containsAny(froms, tos))
+					$e2.addClass("hilighted");
+			});
+		},
+		function() {
+			$("[data-from]").each(function(i2, e2) {
+				$e.removeClass("hilighted");
+				var $e2 = $(e2),
+				froms = $e2.data("from").toString().split(/\s+/);
+				if (containsAny(froms, tos))
+					$e2.removeClass("hilighted");
+			});
+		});
+	});
+});
+</SCRIPT>
+
+<LINK REL="stylesheet" HREF="http://Shared.BHStudios.org/_css/reset.css"/>
+<LINK REL="stylesheet" HREF="http://Prog.BHStudios.org/Husk/_css/Husk.css"/>
+<LINK REL="stylesheet" HREF="http://Prog.BHStudios.org/Husk/_css/Flex.css"/>
+<LINK REL="stylesheet" HREF="http://Prog.BHStudios.org/Husk/_css/Type.css"/>
+<LINK REL="stylesheet" HREF="http://Prog.BHStudios.org/Husk/_css/Print.css"/>
+<STYLE>
+.code-css * {
+	transition: .25s ease-in-out all;
+}
+.code-css {
+	font-family: monospace;
+	font-size: 1em;
+	background: rgba(0,0,0, .05);
+	color: #455A64;
+	border: thin dashed #607D8B;
+	overflow: auto;
+}
+	.code-css B {
+		font-weight: normal;
+	}
+/* Colors are each a Material Design color */
+.css-sel-elem     { color: #1E88E5; }
+.css-sel-ps-class { color: #FB8C00; }
+.css-prop         { color: #7CB342; }
+.css-val          { color: #00897B; }
+.css-sel-attr     { color: #E53935; }
+.css-sel-attr-str { color: #D81B60; }
+.css-media        { color: #5E35B1; }
+.css-math,
+.mars-math        { color: #29B6F6; }
+.mars-match       { color: #039BE5; }
+.mars-prop        { color: #0277BD; }
+
+
+
+.hilighted {
+	background-color: #F4FF81;
+}
+</STYLE>
+</HEAD>
+
+
+
+<BODY CLASS="husktype">
+<MAIN CLASS="widest-huge">
+<ARTICLE>
+	<H1><B>M</B>athematically-<B>A</B>ugmented <B>R</B>ecursive <B>S</B>tylesheets</H1>
+	<P>A CSS preprocessor that allows complex math to be performed and rules to be placed within rules, while still looking much like CSS3.</P>
+
+	<SECTION>
+		<H2 CLASS="all-12">Responsive Button Example</H2>
+		<P CLASS="all-12">The following selector selects all buttons, colors them blue, makes their text the same color as link text, gives them 0.5em padding on top and bottom and 1em padding on left and right, and sets the width to be 100% of its parent, minus its left and right padding. It then says that, on hover or focus, the background should change to lightblue, and on mousedown:</P>
+		<SECTION CLASS="row">
+			<SECTION CLASS="all-6 small-12">
+				<FIGURE>
+					<FIGCAPTION><H3>Initial (<CODE>.MARS</CODE>)</H3></FIGCAPTION>
+					<PRE CLASS="code-css">
+<SPAN DATA-FROM="link-color"><B CLASS="css-sel-elem">*</B><B CLASS="css-sel-ps-class">:link</B></SPAN> {
+	<SPAN DATA-FROM="link-color"><B CLASS="css-prop">color</B>: <B CLASS="css-val">blue</B>;</SPAN>
+}
+
+<SPAN DATA-FROM="btn-basis btn-bg btn-color btn-pad btn-width btn-hover btn-focus btn-active btn-media"><B CLASS="css-sel-elem">button</B>,
+<B CLASS="css-sel-elem">input</B>[<B CLASS="css-sel-attr">type</B>=(<B CLASS="css-sel-attr-str">"button"</B>,<B CLASS="css-sel-attr-str">"submit"</B>,<B CLASS="css-sel-attr-str">"reset"</B>)]</SPAN> {
+	<SPAN DATA-FROM="btn-bg"><B CLASS="css-prop">background-color</B>: <B CLASS="css-val">white</B>;</SPAN>
+	<SPAN DATA-FROM="btn-color"><B CLASS="css-prop">color</B>: <B CLASS="mars-match">match</B>(<B CLASS="css-sel-elem">*</B><B CLASS="css-sel-ps-class">:link</B>);</SPAN>
+	<SPAN DATA-FROM="btn-pad"><B CLASS="css-prop">padding</B>: <B CLASS="css-val">0.5em 1em</B>;</SPAN>
+	<SPAN DATA-FROM="btn-width"><B CLASS="css-prop">width</B>: <B CLASS="mars-math">?</B>(<B CLASS="css-val">100%</B> - <B CLASS="mars-prop">prop</B>(<B CLASS="css-prop">padding-left</B>) - <B CLASS="mars-prop">prop</B>(<B CLASS="css-prop">padding-right</B>));</SPAN>
+	
+	<SPAN DATA-FROM="btn-hover btn-focus"><B CLASS="css-sel-ps-class">:hover</B>,
+	<B CLASS="css-sel-ps-class">:focus</B> {
+		<B CLASS="css-prop">background-color</B>: <B CLASS="css-val">lightblue</B>;
+	}</SPAN>
+	<SPAN DATA-FROM="btn-active"><B CLASS="css-sel-ps-class">:active</B> {
+		<B CLASS="css-prop">background-color</B>: <B CLASS="css-val">black</B>;
+		<B CLASS="css-prop">color</B>: <B CLASS="css-val">white</B>;
+	}</SPAN>
+	
+	<SPAN DATA-FROM="btn-media">(<B CLASS="css-media">max-width</B>: <B CLASS="css-val">1024px</B>) {
+		<B CLASS="css-prop">font-size</B>: <B CLASS="css-val">80%</B>;
+	}</SPAN>
+}
+</PRE>
+				</FIGURE>
+			</SECTION>
+
+			<SECTION CLASS="all-6 small-12">
+				<FIGURE>
+					<FIGCAPTION><H3>Compiled (<CODE>.CSS3</CODE>)</H3></FIGCAPTION>
+					<PRE CLASS="code-css">
+<SPAN DATA-TO="link-color"><B CLASS="css-sel-elem">*</B><B CLASS="css-sel-ps-class">:link</B>,</SPAN>
+<SPAN DATA-TO="btn-color"><B CLASS="css-sel-elem">button</B>,
+<B CLASS="css-sel-elem">input</B>[<B CLASS="css-sel-attr">type</B>=<B CLASS="css-sel-attr-str">"button"</B>],
+<B CLASS="css-sel-elem">input</B>[<B CLASS="css-sel-attr">type</B>=<B CLASS="css-sel-attr-str">"submit"</B>],
+<B CLASS="css-sel-elem">input</B>[<B CLASS="css-sel-attr">type</B>=<B CLASS="css-sel-attr-str">"reset"</B>] </SPAN><SPAN DATA-TO="link-color btn-color">{
+	<B CLASS="css-prop">color</B>: <B CLASS="css-val">blue</B>;
+}</SPAN>
+
+<SPAN DATA-TO="btn-basis btn-bg btn-pad btn-width"><B CLASS="css-sel-elem">button</B>,
+<B CLASS="css-sel-elem">input</B>[<B CLASS="css-sel-attr">type</B>=<B CLASS="css-sel-attr-str">"button"</B>],
+<B CLASS="css-sel-elem">input</B>[<B CLASS="css-sel-attr">type</B>=<B CLASS="css-sel-attr-str">"submit"</B>],
+<B CLASS="css-sel-elem">input</B>[<B CLASS="css-sel-attr">type</B>=<B CLASS="css-sel-attr-str">"reset"</B>]</SPAN> {
+	<SPAN DATA-TO="btn-bg"><B CLASS="css-prop">background-color</B>: <B CLASS="css-val">white</B>;</SPAN>
+	<SPAN DATA-TO="btn-pad"><B CLASS="css-prop">padding</B>: <B CLASS="css-val">0.5em 1em</B>;</SPAN>
+	<SPAN DATA-TO="btn-width"><B CLASS="css-prop">width</B>: <B CLASS="mars-math">calc</B>(<B CLASS="css-val">100%</B> - <B CLASS="css-val">1em</B> - <B CLASS="css-val">1em</B>);</SPAN>
+}
+	<SPAN DATA-TO="btn-hover btn-focus"><B CLASS="css-sel-elem">button</B><B CLASS="css-sel-ps-class">:hover</B>, <B CLASS="css-sel-elem">button</B><B CLASS="css-sel-ps-class">:focus</B>,
+	<B CLASS="css-sel-elem">input</B>[<B CLASS="css-sel-attr">type</B>=<B CLASS="css-sel-attr-str">"button"</B>]<B CLASS="css-sel-ps-class">:hover</B>, <B CLASS="css-sel-elem">input</B>[<B CLASS="css-sel-attr">type</B>=<B CLASS="css-sel-attr-str">"button"</B>]<B CLASS="css-sel-ps-class">:focus</B>,
+	<B CLASS="css-sel-elem">input</B>[<B CLASS="css-sel-attr">type</B>=<B CLASS="css-sel-attr-str">"submit"</B>]<B CLASS="css-sel-ps-class">:hover</B>, <B CLASS="css-sel-elem">input</B>[<B CLASS="css-sel-attr">type</B>=<B CLASS="css-sel-attr-str">"submit"</B>]<B CLASS="css-sel-ps-class">:focus</B>,
+	<B CLASS="css-sel-elem">input</B>[<B CLASS="css-sel-attr">type</B>=<B CLASS="css-sel-attr-str">"reset"</B>]<B CLASS="css-sel-ps-class">:hover</B>,  <B CLASS="css-sel-elem">input</B>[<B CLASS="css-sel-attr">type</B>=<B CLASS="css-sel-attr-str">"reset"</B>]<B CLASS="css-sel-ps-class">:focus</B> {
+		<B CLASS="css-prop">background-color</B>: <B CLASS="css-val">lightblue</B>;
+	}</SPAN>
+	<SPAN DATA-TO="btn-active"><B CLASS="css-sel-elem">button</B><B CLASS="css-sel-ps-class">:active</B>,
+	<B CLASS="css-sel-elem">input</B>[<B CLASS="css-sel-attr">type</B>=<B CLASS="css-sel-attr-str">"button"</B>]<B CLASS="css-sel-ps-class">:active</B>,
+	<B CLASS="css-sel-elem">input</B>[<B CLASS="css-sel-attr">type</B>=<B CLASS="css-sel-attr-str">"submit"</B>]<B CLASS="css-sel-ps-class">:active</B>,
+	<B CLASS="css-sel-elem">input</B>[<B CLASS="css-sel-attr">type</B>=<B CLASS="css-sel-attr-str">"reset"</B>]<B CLASS="css-sel-ps-class">:active</B> {
+		<B CLASS="css-prop">background-color</B>: <B CLASS="css-val">black</B>;
+		<B CLASS="css-prop">color</B>: <B CLASS="css-val">white</B>;
+	}</SPAN>
+	<SPAN DATA-TO="btn-media"><B CLASS="css-media">@media</B> (<B CLASS="css-media">max-width</B>: <B CLASS="css-val">1024px</B>) {
+		<B CLASS="css-sel-elem">button</B>,
+		<B CLASS="css-sel-elem">input</B>[<B CLASS="css-sel-attr">type</B>=<B CLASS="css-sel-attr-str">"button"</B>],
+		<B CLASS="css-sel-elem">input</B>[<B CLASS="css-sel-attr">type</B>=<B CLASS="css-sel-attr-str">"submit"</B>],
+		<B CLASS="css-sel-elem">input</B>[<B CLASS="css-sel-attr">type</B>=<B CLASS="css-sel-attr-str">"reset"</B>] {
+			<B CLASS="css-prop">font-size</B>: <B CLASS="css-val">80%</B>;
+		}
+	}</SPAN>
+</PRE>
+				</FIGURE>
+			</SECTION>
+		</SECTION>
+		<FIGURE CLASS="widest-tiny centered">
+			<FIGCAPTION>
+				<H3>Output example</H3>
+			</FIGCAPTION>
+			<STYLE>
+				#demo *:link,
+				#demo button,
+				#demo input[type="button"],
+				#demo input[type="submit"],
+				#demo input[type="reset"] {
+					color: blue;
+				}
+
+				#demo button,
+				#demo input[type="button"],
+				#demo input[type="submit"],
+				#demo input[type="reset"] {
+					background-color: white;
+					padding: 0.5em 1em;
+					width: calc(100% - 1em - 1em);
+				}
+					#demo button:hover, button:focus,
+					#demo input[type="button"]:hover, input[type="button"]:focus,
+					#demo input[type="submit"]:hover, input[type="submit"]:focus,
+					#demo input[type="reset"]:hover,  input[type="reset"]:focus {
+						background-color: lightblue;
+					}
+					#demo button:active,
+					#demo input[type="button"]:active,
+					#demo input[type="submit"]:active,
+					#demo input[type="reset"]:active {
+						background-color: black;
+						color: white;
+					}
+					@media (max-width: 1024px) {
+						#demo button,
+						#demo input[type="button"],
+						#demo input[type="submit"],
+						#demo input[type="reset"] {
+							font-size: 80%;
+						}
+					}
+			</STYLE>
+			<DIV ID="demo">
+				<A HREF="#">Demo link</A>
+				<BUTTON>Demo button</BUTTON>
+			</DIV>
+		</FIGURE>
+	</SECTION>
+</ARTICLE>
+</MAIN>
+</BODY>
+</HTML>
