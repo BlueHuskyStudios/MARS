@@ -4,60 +4,50 @@
 	<TITLE>MARS</TITLE>
 
 	<SCRIPT SRC="//Shared.BHStudios.org/_js/jQuery-2.1.1.min.js">/* jQuery */</SCRIPT>
-	<SCRIPT>
-	function containsAny(haystack, needles) {
-		for(needle in needles)
-			if (haystack.indexOf(needles[needle]) >= 0)
-				return true;
-	}
-	$(document).ready(function() {
-		/* from to */
-		$("[data-from]").each(function(i, e) {
-			var $e = $(e),
-			froms = $e.data("from").toString().split(/\s+/); // must do toString in case we get an int
-			$e.hover(function() {
-				$e.addClass("hilighted");
-				$("[data-to]").each(function(i2, e2) {
-					var $e2 = $(e2),
-					tos = $e2.data("to").toString().split(/\s+/);
-					if (containsAny(tos, froms))
-						$e2.addClass("hilighted");
-				});
-			},
-			function() {
-				$("[data-to]").each(function(i2, e2) {
-					$e.removeClass("hilighted");
-					var $e2 = $(e2),
-					tos = $e2.data("to").toString().split(/\s+/);
-					if (containsAny(tos, froms))
-						$e2.removeClass("hilighted");
-				});
-			});
-		});
-		
-		/* to from */
-		$("[data-to]").each(function(i, e) {
-			var $e = $(e),
-			tos = $e.data("to").toString().split(/\s+/);
-			$e.hover(function() {
-				$e.addClass("hilighted");
-				$("[data-from]").each(function(i2, e2) {
-					var $e2 = $(e2),
-					froms = $e2.data("from").toString().split(/\s+/);
-					if (containsAny(froms, tos))
-						$e2.addClass("hilighted");
-				});
-			},
-			function() {
-				$("[data-from]").each(function(i2, e2) {
-					$e.removeClass("hilighted");
-					var $e2 = $(e2),
-					froms = $e2.data("from").toString().split(/\s+/);
-					if (containsAny(froms, tos))
-						$e2.removeClass("hilighted");
-				});
-			});
-		});
+	<SCRIPT> /* Thanks to http://codereview.stackexchange.com/a/70131/30419 for fixing this up! */
+	$(function() {
+		var containsAny = function(haystack, needles) {
+			for(needle in needles)
+				if (haystack.indexOf(needles[needle]) >= 0)
+					return true;
+		}
+
+		var whiteSpaceRegexp = /\s+/;
+		function isFromString(isFrom){
+			return isFrom ? "from" : "to";
+		};
+		function splitData($element, isFrom){
+			return $element.data(isFromString(isFrom)).toString().split(whiteSpaceRegexp);
+		};
+
+		function createToggleFunction($element, classMethodName, searches, isFrom){
+			return function(){
+				$element[classMethodName]("hilighted");
+				$("[data-" + isFromString(isFrom) + "]").each( 
+					function(index, innerElement) {
+						var $innerElement = $(innerElement);
+						var words = splitData($innerElement, isFrom);
+						if (containsAny(words, searches))
+							$innerElement[classMethodName]("hilighted");
+					}
+				);
+			};
+		};
+
+		var createHoverFunction = function(isFrom)
+		{
+			return function(index, element) {
+				var $element = $(element);
+				var searches = splitData($element, isFrom);
+				$element.hover(
+					createToggleFunction($element, "addClass", searches, !isFrom),
+					createToggleFunction($element, "removeClass", searches, !isFrom)
+				);
+			};
+		};
+
+		$("[data-from]").each(createHoverFunction(true));
+		$("[data-to]").each(createHoverFunction(false));
 	});
 	</SCRIPT>
 
@@ -66,6 +56,7 @@
 	<LINK REL="stylesheet" HREF="//Prog.BHStudios.org/Husk/_css/Flex.css"/>
 	<LINK REL="stylesheet" HREF="//Prog.BHStudios.org/Husk/_css/Type.css"/>
 	<LINK REL="stylesheet" HREF="//Prog.BHStudios.org/Husk/_css/Print.css"/>
+	<LINK REL="stylesheet" HREF="//Shared.BHStudios.org/_css/material.css"/>
 	<STYLE>
 	.code-css * {
 		transition: .25s ease-in-out all;
