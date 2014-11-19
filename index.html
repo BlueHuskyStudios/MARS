@@ -1,106 +1,108 @@
 <!DOCTYPE HTML>
-<HTML>
+<HTML CLASS="material">
 <HEAD>
-<SCRIPT SRC="//Shared.BHStudios.org/_js/jQuery-2.1.1.min.js">/* jQuery */</SCRIPT>
-<SCRIPT>
-function containsAny(haystack, needles) {
-	for(needle in needles)
-		if (haystack.indexOf(needles[needle]) >= 0)
-			return true;
-}
-$(document).ready(function() {
-	/* from to */
-	$("[data-from]").each(function(i, e) {
-		var $e = $(e),
-		froms = $e.data("from").toString().split(/\s+/); // must do toString in case we get an int
-		$e.hover(function() {
-			$e.addClass("hilighted");
-			$("[data-to]").each(function(i2, e2) {
-				var $e2 = $(e2),
-				tos = $e2.data("to").toString().split(/\s+/);
-				if (containsAny(tos, froms))
-					$e2.addClass("hilighted");
-			});
-		},
-		function() {
-			$("[data-to]").each(function(i2, e2) {
-				$e.removeClass("hilighted");
-				var $e2 = $(e2),
-				tos = $e2.data("to").toString().split(/\s+/);
-				if (containsAny(tos, froms))
-					$e2.removeClass("hilighted");
-			});
-		});
-	});
-	
-	/* to from */
-	$("[data-to]").each(function(i, e) {
-		var $e = $(e),
-		tos = $e.data("to").toString().split(/\s+/);
-		$e.hover(function() {
-			$e.addClass("hilighted");
-			$("[data-from]").each(function(i2, e2) {
-				var $e2 = $(e2),
-				froms = $e2.data("from").toString().split(/\s+/);
-				if (containsAny(froms, tos))
-					$e2.addClass("hilighted");
-			});
-		},
-		function() {
-			$("[data-from]").each(function(i2, e2) {
-				$e.removeClass("hilighted");
-				var $e2 = $(e2),
-				froms = $e2.data("from").toString().split(/\s+/);
-				if (containsAny(froms, tos))
-					$e2.removeClass("hilighted");
-			});
-		});
-	});
-});
-</SCRIPT>
+	<TITLE>MARS</TITLE>
 
-<LINK REL="stylesheet" HREF="//Shared.BHStudios.org/_css/reset.css"/>
-<LINK REL="stylesheet" HREF="//Prog.BHStudios.org/Husk/_css/Husk.css"/>
-<LINK REL="stylesheet" HREF="//Prog.BHStudios.org/Husk/_css/Flex.css"/>
-<LINK REL="stylesheet" HREF="//Prog.BHStudios.org/Husk/_css/Type.css"/>
-<LINK REL="stylesheet" HREF="//Prog.BHStudios.org/Husk/_css/Print.css"/>
-<STYLE>
-.code-css * {
-	transition: .25s ease-in-out all;
-}
-.code-css {
-	font-family: monospace;
-	font-size: 1em;
-	background: rgba(0,0,0, .05);
-	color: #455A64;
-	border: thin dashed #607D8B;
-	overflow: auto;
-}
-	.code-css B {
-		font-weight: normal;
+	<SCRIPT SRC="//Shared.BHStudios.org/_js/jQuery-2.1.1.min.js">/* jQuery */</SCRIPT>
+	<SCRIPT>
+	function containsAny(haystack, needles) {
+		for(needle in needles)
+			if (haystack.indexOf(needles[needle]) >= 0)
+				return true;
 	}
-/* Colors are each a Material Design color */
-.css-sel-elem     { color: #1E88E5; }
-.css-sel-ps-class { color: #FB8C00; }
-.css-prop         { color: #7CB342; }
-.css-val          { color: #00897B; }
-.css-sel-attr     { color: #E53935; }
-.css-sel-attr-str { color: #D81B60; }
-.css-media        { color: #5E35B1; }
-.css-math,
-.mars-math        { color: #29B6F6; }
-.mars-match       { color: #039BE5; }
-.mars-prop        { color: #0277BD; }
+	$(document).ready(function() {
+		/* from to */
+		$("[data-from]").each(function(i, e) {
+			var $e = $(e),
+			froms = $e.data("from").toString().split(/\s+/); // must do toString in case we get an int
+			$e.hover(function() {
+				$e.addClass("hilighted");
+				$("[data-to]").each(function(i2, e2) {
+					var $e2 = $(e2),
+					tos = $e2.data("to").toString().split(/\s+/);
+					if (containsAny(tos, froms))
+						$e2.addClass("hilighted");
+				});
+			},
+			function() {
+				$("[data-to]").each(function(i2, e2) {
+					$e.removeClass("hilighted");
+					var $e2 = $(e2),
+					tos = $e2.data("to").toString().split(/\s+/);
+					if (containsAny(tos, froms))
+						$e2.removeClass("hilighted");
+				});
+			});
+		});
+		
+		/* to from */
+		$("[data-to]").each(function(i, e) {
+			var $e = $(e),
+			tos = $e.data("to").toString().split(/\s+/);
+			$e.hover(function() {
+				$e.addClass("hilighted");
+				$("[data-from]").each(function(i2, e2) {
+					var $e2 = $(e2),
+					froms = $e2.data("from").toString().split(/\s+/);
+					if (containsAny(froms, tos))
+						$e2.addClass("hilighted");
+				});
+			},
+			function() {
+				$("[data-from]").each(function(i2, e2) {
+					$e.removeClass("hilighted");
+					var $e2 = $(e2),
+					froms = $e2.data("from").toString().split(/\s+/);
+					if (containsAny(froms, tos))
+						$e2.removeClass("hilighted");
+				});
+			});
+		});
+	});
+	</SCRIPT>
+
+	<LINK REL="stylesheet" HREF="//Shared.BHStudios.org/_css/reset.css"/>
+	<LINK REL="stylesheet" HREF="//Prog.BHStudios.org/Husk/_css/Husk.css"/>
+	<LINK REL="stylesheet" HREF="//Prog.BHStudios.org/Husk/_css/Flex.css"/>
+	<LINK REL="stylesheet" HREF="//Prog.BHStudios.org/Husk/_css/Type.css"/>
+	<LINK REL="stylesheet" HREF="//Prog.BHStudios.org/Husk/_css/Print.css"/>
+	<STYLE>
+	.code-css * {
+		transition: .25s ease-in-out all;
+	}
+	.code-css {
+		font-family: monospace;
+		font-size: 1em;
+		background: rgba(0,0,0, .05);
+		color: #455A64;
+		border: thin dashed #607D8B;
+		overflow: auto;
+	}
+		.code-css B {
+			font-weight: normal;
+		}
+	/* Colors are each a Material Design color */
+	.css-sel-elem     { color: #1E88E5; }
+	.css-sel-ps-class { color: #FB8C00; }
+	.css-prop         { color: #7CB342; }
+	.css-val          { color: #00897B; }
+	.css-sel-attr     { color: #E53935; }
+	.css-sel-attr-str { color: #D81B60; }
+	.css-media        { color: #5E35B1; }
+	.css-math,
+	.mars-math        { color: #29B6F6; }
+	.mars-match       { color: #039BE5; }
+	.mars-prop        { color: #0277BD; }
 
 
 
-.hilighted {
-	background-color: #F4FF81;
-}
-MAIN>FOOTER {
-	min-height: 25vh;
-}
-</STYLE>
+	.hilighted {
+		background-color: #F4FF81;
+	}
+	MAIN>FOOTER {
+		min-height: 25vh;
+	}
+	</STYLE>
 </HEAD>
 
 
@@ -243,7 +245,7 @@ MAIN>FOOTER {
 	</SECTION>
 </ARTICLE>
 
-<FOOTER CLASS="flex-column flex-vert-center flex-horiz-center">
+<FOOTER CLASS="flex-column flex-vert-center flex-horiz-center   font-1-1hx">
 	<P>See <A HREF="https://github.com/BlueHuskyStudios/MARS">our GitHub</A> for more.</P>
 </FOOTER>
 </MAIN>
