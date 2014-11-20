@@ -106,14 +106,14 @@
 
 	<SECTION>
 		<H2 CLASS="all-12">Responsive Button Example</H2>
-		<P CLASS="all-12">The following selector selects all buttons, colors them blue, makes their text the same color as link text, gives them 0.5em padding on top and bottom and 1em padding on left and right, and sets the width to be 100% of its parent, minus its left and right padding. It then says that, on hover or focus, the background should change to lightblue, and on mousedown, it should be black with white text:</P>
+		<P CLASS="all-12">The following selector selects all buttons, colors them orange, makes their text the same color as link text, gives them 0.5em padding on top and bottom and 1em padding on left and right, and sets the width to be 100% of its parent, minus its left and right padding. It then says that, on hover or focus, the background should change to lightblue, and on mousedown, it should be black with white text:</P>
 		<SECTION CLASS="row">
 			<SECTION CLASS="all-6 small-12">
 				<FIGURE>
 					<FIGCAPTION><H3>Initial (<CODE>.MARS</CODE>)</H3></FIGCAPTION>
 					<PRE CLASS="code-css">
 <SPAN DATA-FROM="link-color"><B CLASS="css-sel-elem">*</B><B CLASS="css-sel-ps-class">:link</B></SPAN> {
-	<SPAN DATA-FROM="link-color"><B CLASS="css-prop">color</B>: <B CLASS="css-val">blue</B>;</SPAN>
+	<SPAN DATA-FROM="link-color"><B CLASS="css-prop">color</B>: <B CLASS="css-val">orange</B>;</SPAN>
 }
 
 <SPAN DATA-FROM="btn-basis btn-bg btn-color btn-pad btn-width btn-hover btn-focus btn-active btn-media"><B CLASS="css-sel-elem">button</B>,
@@ -149,7 +149,7 @@
 <B CLASS="css-sel-elem">input</B>[<B CLASS="css-sel-attr">type</B>=<B CLASS="css-sel-attr-str">"button"</B>],
 <B CLASS="css-sel-elem">input</B>[<B CLASS="css-sel-attr">type</B>=<B CLASS="css-sel-attr-str">"submit"</B>],
 <B CLASS="css-sel-elem">input</B>[<B CLASS="css-sel-attr">type</B>=<B CLASS="css-sel-attr-str">"reset"</B>] </SPAN>{
-	<SPAN DATA-TO="link-color btn-color"><B CLASS="css-prop">color</B>: <B CLASS="css-val">blue</B>;</SPAN>
+	<SPAN DATA-TO="link-color btn-color"><B CLASS="css-prop">color</B>: <B CLASS="css-val">orange</B>;</SPAN>
 }
 
 <SPAN DATA-TO="btn-basis btn-bg btn-pad btn-width"><B CLASS="css-sel-elem">button</B>,
@@ -185,7 +185,7 @@
 				</FIGURE>
 			</SECTION>
 		</SECTION>
-		<FIGURE CLASS="widest-tiny centered">
+		<FIGURE CLASS="widest-tiny centered inset">
 			<FIGCAPTION>
 				<H3>Output example</H3>
 			</FIGCAPTION>
@@ -195,7 +195,7 @@
 				#demo input[type="button"],
 				#demo input[type="submit"],
 				#demo input[type="reset"] {
-					color: blue;
+					color: orange;
 				}
 
 				#demo button,
