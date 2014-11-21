@@ -1,15 +1,15 @@
-*:link {
+*:link { /* All CSS3 selectors work */
 	color: blue;
 }
 
 button,
-input[type=("button","submit","reset")] {
+input[type=("button","submit","reset")] { /* comma-separated lists in parentheses match multiple selectors */
 	background-color: white;
-	color: match(*:link);
+	color: match(*:link); /* the match() function takes a single CSS3 selector and works backwards through the stylesheet(s) and fetches the property reprsented in the given selector */
 	padding: 0.5em 1em;
-	width: ?(100% - prop(padding-left) - prop(padding-right));
+	width: ?(100% - prop(padding-left) - prop(padding-right)); /* the ?() function performs math. The prop() function works like the match() function, but for properties rather than selectors */
 	
-	:hover,
+	:hover, /* selectors within selectors (like #id { .class {}}) are allowed as shorthand (for #id.class {}) */
 	:focus {
 		background-color: lightblue;
 	}
@@ -18,12 +18,13 @@ input[type=("button","submit","reset")] {
 		color: white;
 	}
 	
-	(max-width: 1024px) {
+	(max-width: 1024px) { /* parentheses denote a media query. These are distinct from multiple-selection parentheses in that they are not comma-separated */
 		font-size: 80%;
 	}
 }
 
-(h1, h2, h3, h4, h5, h6).plain {
+(h1, h2, h3, h4, h5, h6, header .heading).plain { /* multiple-selectors can work with any selector */
+	background: match(h1); /* match() can take seemingly recursive selectors because they skip themselves and work backwards. If no value is found, an expected default is used */
 	margin: 0;
 	padding: 0;
 }
