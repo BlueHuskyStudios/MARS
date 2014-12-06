@@ -3,7 +3,7 @@
 <HEAD>
 	<TITLE>MARS</TITLE>
 
-	<SCRIPT SRC="//Shared.BHStudios.org/_js/jQuery-2.1.1.min.js">/* jQuery */</SCRIPT>
+	<SCRIPT SRC="https://Shared.BHStudios.org/_js/jQuery-2.1.1.min.js">/* jQuery */</SCRIPT>
 	<SCRIPT> /* Thanks to http://codereview.stackexchange.com/a/70131/30419 for fixing this up! */
 	$(function() {
 		var containsAny = function(haystack, needles) {
@@ -51,12 +51,12 @@
 	});
 	</SCRIPT>
 
-	<LINK REL="stylesheet" HREF="//Shared.BHStudios.org/_css/reset.css"/>
-	<LINK REL="stylesheet" HREF="//Prog.BHStudios.org/Husk/_css/Husk.css"/>
-	<LINK REL="stylesheet" HREF="//Prog.BHStudios.org/Husk/_css/Flex.css"/>
-	<LINK REL="stylesheet" HREF="//Prog.BHStudios.org/Husk/_css/Type.css"/>
-	<LINK REL="stylesheet" HREF="//Prog.BHStudios.org/Husk/_css/Print.css"/>
-	<LINK REL="stylesheet" HREF="//Shared.BHStudios.org/_css/material.css"/>
+	<LINK REL="stylesheet" HREF="https://Shared.BHStudios.org/_css/reset.css"/>
+	<LINK REL="stylesheet" HREF="https://Prog.BHStudios.org/Husk/_css/Husk.css"/>
+	<LINK REL="stylesheet" HREF="https://Prog.BHStudios.org/Husk/_css/Flex.css"/>
+	<LINK REL="stylesheet" HREF="https://Prog.BHStudios.org/Husk/_css/Type.css"/>
+	<LINK REL="stylesheet" HREF="https://Prog.BHStudios.org/Husk/_css/Print.css"/>
+	<LINK REL="stylesheet" HREF="https://Shared.BHStudios.org/_css/material.css"/>
 	<STYLE>
 	.code-css * {
 		transition: .25s ease-in-out all;
@@ -74,6 +74,7 @@
 		}
 	/* Colors are each a Material Design color */
 	.css-sel-elem     { color: #1E88E5; }
+	.css-sel-class    { color: #8E24AA; }
 	.css-sel-ps-class { color: #FB8C00; }
 	.css-prop         { color: #7CB342; }
 	.css-val          { color: #00897B; }
@@ -105,12 +106,12 @@
 	<P>A (currently theoretical) CSS preprocessor that allows complex math to be performed and rules to be placed within rules, while still looking much like CSS3.</P>
 
 	<SECTION>
-		<H2 CLASS="all-12">Responsive Button Example</H2>
-		<P CLASS="all-12">The following selector selects all buttons, colors them orange, makes their text the same color as link text, gives them 0.5em padding on top and bottom and 1em padding on left and right, and sets the width to be 100% of its parent, minus its left and right padding. It then says that, on hover or focus, the background should change to lightblue, and on mousedown, it should be black with white text:</P>
-		<SECTION CLASS="row">
+		<H2>Responsive Button Example</H2>
+		<P>The following selector selects all buttons, colors them orange, makes their text the same color as link text, gives them 0.5em padding on top and bottom and 1em padding on left and right, and sets the width to be 100% of its parent, minus its left and right padding. It then says that, on hover or focus, the background should change to lightblue, and on mousedown, it should be black with white text. Then, it shows a selector that styles all heading elements (<CODE>H1</CODE> - <CODE>H6</CODE>), and anything with the <CODE>.heading</CODE> class which is in a <CODE>HEADER</CODE>, <EM>but only when</EM> those have the <CODE>.plain</CODE> class.</P>
+		<DIV CLASS="row">
 			<SECTION CLASS="all-6 small-12">
+				<H3>Initial (<CODE>.MARS</CODE>)</H3>
 				<FIGURE>
-					<FIGCAPTION><H3>Initial (<CODE>.MARS</CODE>)</H3></FIGCAPTION>
 					<PRE CLASS="code-css">
 <SPAN DATA-FROM="link-color"><B CLASS="css-sel-elem">*</B><B CLASS="css-sel-ps-class">:link</B></SPAN> {
 	<SPAN DATA-FROM="link-color"><B CLASS="css-prop">color</B>: <B CLASS="css-val">orange</B>;</SPAN>
@@ -136,13 +137,21 @@
 		<B CLASS="css-prop">font-size</B>: <B CLASS="css-val">80%</B>;
 	}</SPAN>
 }
+
+<SPAN DATA-FROM="headings headings-bg headings-margin headings-padding"><B CLASS="css-sel-elem">header</B> (<B CLASS="css-sel-elem">h1</B>, <B CLASS="css-sel-elem">h2</B>, <B CLASS="css-sel-elem">h3</B>, <B CLASS="css-sel-elem">h4</B>, <B CLASS="css-sel-elem">h5</B>, <B CLASS="css-sel-elem">h6</B>, <B CLASS="css-sel-class">.heading</B>)<B CLASS="css-sel-class">.plain</B></SPAN> {
+	<SPAN DATA-FROM="headings-bg"><B CLASS="css-prop">background</B>: <B CLASS="mars-match">match</B>(<B CLASS="css-sel-elem">h1</B>);</SPAN>
+	<SPAN DATA-FROM="headings-margin"><B CLASS="css-prop">margin</B>: <B CLASS="css-val">0</B>;</SPAN>
+	<SPAN DATA-FROM="headings-padding"><B CLASS="css-prop">padding</B>: <B CLASS="css-val">0</B>;</SPAN>
+}
 </PRE>
 				</FIGURE>
 			</SECTION>
 
+
+
 			<SECTION CLASS="all-6 small-12">
+				<H3>Processed (<CODE>.CSS3</CODE>)</H3>
 				<FIGURE>
-					<FIGCAPTION><H3>Compiled (<CODE>.CSS3</CODE>)</H3></FIGCAPTION>
 					<PRE CLASS="code-css">
 <SPAN DATA-TO="link-color"><B CLASS="css-sel-elem">*</B><B CLASS="css-sel-ps-class">:link</B>,</SPAN>
 <SPAN DATA-TO="btn-color"><B CLASS="css-sel-elem">button</B>,
@@ -181,11 +190,23 @@
 			<B CLASS="css-prop">font-size</B>: <B CLASS="css-val">80%</B>;
 		}
 	}</SPAN>
+
+<SPAN DATA-TO="headings headings-bg headings-margin headings-padding"><B CLASS="css-sel-elem">header</B> <B CLASS="css-sel-elem">h1</B><B CLASS="css-sel-class">.plain</B>,
+<B CLASS="css-sel-elem">header</B> <B CLASS="css-sel-elem">h2</B><B CLASS="css-sel-class">.plain</B>,
+<B CLASS="css-sel-elem">header</B> <B CLASS="css-sel-elem">h3</B><B CLASS="css-sel-class">.plain</B>,
+<B CLASS="css-sel-elem">header</B> <B CLASS="css-sel-elem">h4</B><B CLASS="css-sel-class">.plain</B>,
+<B CLASS="css-sel-elem">header</B> <B CLASS="css-sel-elem">h5</B><B CLASS="css-sel-class">.plain</B>,
+<B CLASS="css-sel-elem">header</B> <B CLASS="css-sel-elem">h6</B><B CLASS="css-sel-class">.plain</B>,
+<B CLASS="css-sel-elem">header</B> <B CLASS="css-sel-class">.heading</B><B CLASS="css-sel-class">.plain</B></SPAN> {
+	<SPAN DATA-TO="headings headings-bg"><B CLASS="css-prop">background</B>: <B CLASS="css-val">transparent</B>;</SPAN>
+	<SPAN DATA-TO="headings headings-margin"><B CLASS="css-prop">margin</B>: <B CLASS="css-val">0</B>;</SPAN>
+	<SPAN DATA-TO="headings headings-padding"><B CLASS="css-prop">padding</B>: <B CLASS="css-val">0</B>;</SPAN>
+}
 </PRE>
 				</FIGURE>
 			</SECTION>
-		</SECTION>
-		<FIGURE CLASS="widest-tiny centered inset">
+		</DIV>
+		<FIGURE CLASS="widest-tiny centered text-centered inset">
 			<FIGCAPTION>
 				<H3 CLASS="plain">Output example</H3>
 			</FIGCAPTION>
@@ -227,8 +248,22 @@
 							font-size: 80%;
 						}
 					}
+				#demo h1.plain,
+				#demo h2.plain,
+				#demo h3.plain,
+				#demo h4.plain,
+				#demo h5.plain,
+				#demo h6.plain,
+				#demo header .heading.plain {
+					background: transparent;
+					margin: 0;
+					padding: 0;
+				}
 			</STYLE>
 			<DIV ID="demo">
+				<HEADER>
+					<H4>Demo heading (4)</H4>
+				</HEADER>
 				<A HREF="#">Demo link</A>
 				<BUTTON>Demo button</BUTTON>
 			</DIV>
