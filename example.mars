@@ -23,7 +23,7 @@ input[type=("button","submit","reset")] { /* comma-separated lists in parenthese
 	}
 }
 
-(h1, h2, h3, h4, h5, h6, header .heading).plain { /* multiple-selectors can work with any selector */
+header (h1, h2, h3, h4, h5, h6, .heading).plain { /* multiple-selectors can work with any selector */
 	background: match(h1); /* match() can take seemingly recursive selectors because they skip themselves and work backwards. If no value is found, an expected default is used */
 	margin: 0;
 	padding: 0;

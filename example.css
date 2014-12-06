@@ -36,12 +36,12 @@ input[type="reset"] { /* comma-separated lists in parentheses match multiple sel
 		}
 	}
 
-h1.plain,
-h2.plain,
-h3.plain,
-h4.plain,
-h5.plain,
-h6.plain,
+header h1.plain,
+header h2.plain,
+header h3.plain,
+header h4.plain,
+header h5.plain,
+header h6.plain,
 header .heading.plain { /* multiple-selectors can work with any selector */
 	background: transparent; /* match() can take seemingly recursive selectors because they skip themselves and work backwards. If no value is found, an expected default is used */
 	margin: 0;
